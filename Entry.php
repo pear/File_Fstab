@@ -30,12 +30,13 @@ define('FILE_FSTAB_ENTRY_DEVTYPE_LABEL', 3);
  * @package @package@
  * @version @version@
  * @author Ian Eure <ieure@php.net>
+ * @license PHP License v3.0
  */
 class File_Fstab_Entry {
     /**
      * Raw line from fstab
      *
-     * @type string
+     * @var string
      */
     var $entry;
 
@@ -45,7 +46,7 @@ class File_Fstab_Entry {
      * Only one of $device, $uuid, or $label will be set, based on what's in the
      * fstab entry.
      *
-     * @type string
+     * @var string
      */
     var $device = '/dev/null';
 
@@ -55,7 +56,7 @@ class File_Fstab_Entry {
      * Only one of $device, $uuid, or $label will be set, based on what's in the
      * fstab entry.
      *
-     * @type string
+     * @var string
      */
     var $uuid;
 
@@ -65,28 +66,28 @@ class File_Fstab_Entry {
      * Only one of $device, $uuid, or $label will be set, based on what's in the
      * fstab entry.
      *
-     * @type string
+     * @var string
      */
     var $label;
 
     /**
      * Device mount point
      *
-     * @type string
+     * @var string
      */
     var $mountPoint = '/mnt';
 
     /**
      * Device filesystem type
      *
-     * @type string
+     * @var string
      */
     var $fsType = 'auto';
 
     /**
      * Mount options
      *
-     * @type array
+     * @var array
      */
     var $mountOptions = array(
             'defaults' => "defaults"
@@ -95,21 +96,21 @@ class File_Fstab_Entry {
     /**
      * Device dump frequency
      *
-     * @type int
+     * @var int
      */
     var $dumpFrequency = 0;
 
     /**
      * Device fsck pass number
      *
-     * @type int
+     * @var int
      */
     var $fsckPassNo = 0;
 
     /**
      * Have we parsed the entry?
      *
-     * @type boolean
+     * @var boolean
      * @access private
      */
     var $_haveParsed = false;
@@ -118,8 +119,8 @@ class File_Fstab_Entry {
     /**
      * Constructor
      *
-     * @param $entry string Single entry from fstab file
-     * @return void
+     * @param   string  $entry  Single entry from fstab file
+     * @return  void
      */
     function File_Fstab_Entry($entry = false)
     {
@@ -135,9 +136,9 @@ class File_Fstab_Entry {
      * Only one of device, uuid, or label may be set; setting this will un-set
      * any valies in the other variables.
      *
-     * @since 2.0.0beta1
-     * @param $device string Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   string   $device  Value to set
+     * @return  mixed    boolean true on success, PEAR_Error otherwise
      */
     function setDevice($device)
     {
@@ -149,8 +150,8 @@ class File_Fstab_Entry {
     /**
      * Get block device
      *
-     * @since 2.0.0beta1
-     * @return string
+     * @since   2.0.0beta1
+     * @return  string
      */
     function getDevice()
     {
@@ -163,9 +164,9 @@ class File_Fstab_Entry {
      * Only one of device, uuid, or label may be set; setting this will un-set
      * any valies in the other variables.
      *
-     * @since 2.0.0beta1
-     * @param $uuid string Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   string   $uuid  Value to set
+     * @return  mixed    boolean true on success, PEAR_Error otherwise
      */
     function setUUID($uuid)
     {
@@ -177,8 +178,8 @@ class File_Fstab_Entry {
     /**
      * Get UUID
      *
-     * @since 2.0.0beta1
-     * @return string
+     * @since   2.0.0beta1
+     * @return  string
      */
     function getUUID()
     {
@@ -191,9 +192,9 @@ class File_Fstab_Entry {
      * Only one of device, uuid, or label may be set; setting this will un-set
      * any valies in the other variables.
      *
-     * @since 2.0.0beta1
-     * @param $label string Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   string  $label  Value to set
+     * @return  mixed   boolean true on success, PEAR_Error otherwise
      */
     function setLabel($label)
     {
@@ -205,8 +206,8 @@ class File_Fstab_Entry {
     /**
      * Get device label
      *
-     * @since 2.0.0beta1
-     * @return string
+     * @since   2.0.0beta1
+     * @return  string
      */
     function getLabel()
     {
@@ -216,9 +217,9 @@ class File_Fstab_Entry {
     /**
      * Set mount point
      *
-     * @since 2.0.0beta1
-     * @param $dir string Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   string  $dir  Value to set
+     * @return  mixed   boolean true on success, PEAR_Error otherwise
      */
     function setMountPoint($dir)
     {
@@ -229,8 +230,8 @@ class File_Fstab_Entry {
     /**
      * Get mount point
      *
-     * @since 2.0.0beta1
-     * @return string
+     * @since   2.0.0beta1
+     * @return  string
      */
     function getMountPoint()
     {
@@ -240,9 +241,9 @@ class File_Fstab_Entry {
     /**
      * Set filesystem type
      *
-     * @since 2.0.0beta1
-     * @param $type string Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   string  $type  Value to set
+     * @return  mixed   boolean true on success, PEAR_Error otherwise
      */
     function setFsType($type)
     {
@@ -253,8 +254,8 @@ class File_Fstab_Entry {
     /**
      * Get filesystem type
      *
-     * @since 2.0.0beta1
-     * @return string
+     * @since   2.0.0beta1
+     * @return  string
      */
     function getFsType()
     {
@@ -264,9 +265,9 @@ class File_Fstab_Entry {
     /**
      * Set filesystem dump frequency
      *
-     * @since 2.0.0beta1
-     * @param $type int      Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   int    $type  Value to set
+     * @return  mixed  boolean true on success, PEAR_Error otherwise
      */
     function setDumpFrequency($freq)
     {
@@ -277,8 +278,8 @@ class File_Fstab_Entry {
     /**
      * Get filesystem dump frequency
      *
-     * @since 2.0.0beta1
-     * @return int
+     * @since   2.0.0beta1
+     * @return  int
      */
     function getDumpFrequency()
     {
@@ -288,9 +289,9 @@ class File_Fstab_Entry {
     /**
      * Set filesystem fsck pass number
      *
-     * @since 2.0.0beta1
-     * @param $type  int     Value to set
-     * @return mixed boolean true on success, PEAR_Error otherwise
+     * @since   2.0.0beta1
+     * @param   int    $type  Value to set
+     * @return  mixed  boolean true on success, PEAR_Error otherwise
      */
     function setFsckPassNo($pass)
     {
@@ -301,8 +302,8 @@ class File_Fstab_Entry {
     /**
      * Get filesystem fsck pass number
      *
-     * @since 2.0.0beta1
-     * @return int
+     * @since   2.0.0beta1
+     * @return  int
      */   
     function getFsckPassNo()
     {
@@ -312,7 +313,8 @@ class File_Fstab_Entry {
     /**
      * Set an entry
      *
-     * @param $entry string Single entry from fstab file
+     * @param   string  $entry  Single entry from fstab file
+     * @return  void
      */
     function setEntry($entry)
     {
@@ -323,8 +325,8 @@ class File_Fstab_Entry {
     /**
      * Parse fstab entry
      *
-     * @param $entry string Line from fstab to parse
-     * @return mixed true on success, PEAR_Error on failure
+     * @param   string  $entry  Line from fstab to parse
+     * @return  mixed   true on success, PEAR_Error on failure
      */
     function parse()
     {
@@ -367,8 +369,8 @@ class File_Fstab_Entry {
     /**
      * Clean up prior to parsing
      *
-     * @access private
-     * @return void
+     * @access  private
+     * @return  void
      */
     function _cleanup()
     {
@@ -382,8 +384,8 @@ class File_Fstab_Entry {
      *
      * @param $options string Mount options from fstab
      *
-     * @return void
-     * @access protected
+     * @return  void
+     * @access  protected
      */
     function _parseMountOptions($options)
     {
@@ -402,8 +404,8 @@ class File_Fstab_Entry {
     /**
      * Reconstruct fstab options from $mountOptions
      *
-     * @return string fstab mount options
-     * @access protected
+     * @return  string     fstab mount options
+     * @access  protected
      */
     function _makeMountOptions()
     {
@@ -423,7 +425,7 @@ class File_Fstab_Entry {
      *
      * This rebuilds the entry from the class variables.
      *
-     * @return string The fstab entry
+     * @return  string  The fstab entry
      */
     function getEntry($seperator)
     {
@@ -441,7 +443,7 @@ class File_Fstab_Entry {
     /**
      * Get device, or uuid, or label
      *
-     * @return string Device/UUID/LABEL
+     * @return  string  Device/UUID/LABEL
      */
     function getDeviceUUIDOrLabel()
     {
@@ -460,8 +462,8 @@ class File_Fstab_Entry {
      * This is like getDeviceUUIDOrLabel(), but we prefix the actual value
      * with the necessary string for it to work in the fstab.
      *
-     * @return string Device/UUID/LABEL
-     * @access protected
+     * @return  string     Device/UUID/LABEL
+     * @access  protected
      */
     function _getDeviceEntry()
     {
@@ -483,7 +485,7 @@ class File_Fstab_Entry {
     /**
      * Get device type
      *
-     * @return int One of FILE_FSTAB_ENTRY_DEVTYPE_BLOCKDEV, _UUID, or _LABEL
+     * @return  int  One of FILE_FSTAB_ENTRY_DEVTYPE_BLOCKDEV, _UUID, or _LABEL
      */
     function getDeviceType()
     {
@@ -499,8 +501,8 @@ class File_Fstab_Entry {
     /**
      * Is an option set?
      *
-     * @param $option string Option name
-     * @return boolean
+     * @param   string   $option  Option name
+     * @return  boolean
      */
     function hasMountOption($option)
     {
@@ -510,8 +512,8 @@ class File_Fstab_Entry {
     /**
      * Get a mount option
      *
-     * @param string $which Option to get
-     * @return string Mount option
+     * @param   string   $which Option to get
+     * @return  string   Mount option
      */
     function getMountOption($which)
     {
@@ -524,9 +526,9 @@ class File_Fstab_Entry {
     /**
      * Set a mount option
      *
-     * @param string $name Option to set
-     * @param string $value Value to give option, or blank if option takes no args
-     * @return void
+     * @param   string  $name Option to set
+     * @param   string  $value Value to give option, or blank if option takes no args
+     * @return  void
      */
     function setMountOption($name, $value = false)
     {

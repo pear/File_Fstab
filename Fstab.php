@@ -31,26 +31,27 @@ define('FILE_FSTAB_WRONG_CLASS', -3);
  * @package @package@
  * @version @version@
  * @author Ian Eure <ieure@php.net>
+ * @license PHP License v3.0
  */
 class File_Fstab {
     /**
      * Array of fstab entries
      *
-     * @type array
+     * @var array
      */
     var $entries = array();
 
     /**
      * Class options.
      *
-     * @type array
+     * @var array
      */
     var $options = array();
 
     /**
      * Default options
      *
-     * @type array
+     * @var array
      * @access private
      */
     var $_defaultOptions = array(
@@ -62,7 +63,7 @@ class File_Fstab {
     /**
      * Has the fstab been parsed?
      *
-     * @type boolean
+     * @var boolean
      * @access private
      */
     var $_isLoaded = false;
@@ -70,8 +71,8 @@ class File_Fstab {
     /**
      * Constructor
      *
-     * @param $options array Associative array of options to set
-     * @return void
+     * @param   array  $options  Associative array of options to set
+     * @return  void
      */
     function File_Fstab($options = false)
     {
@@ -84,8 +85,8 @@ class File_Fstab {
     /**
      * Return a single instance to handle a fstab file
      *
-     * @param $fstab string Path to the fstab file
-     * @return object File_Fstab instance
+     * @param   string  $fstab  Path to the fstab file
+     * @return  object  File_Fstab instance
      */
     function &singleton($fstab)
     {
@@ -104,8 +105,8 @@ class File_Fstab {
     /**
      * Parse fstab file
      *
-     * @return void
-     * @since 1.0.1
+     * @return  void
+     * @since   1.0.1
      */
     function load()
     {
@@ -136,7 +137,7 @@ class File_Fstab {
      * and adding/removing entries as needed, but I don't feel like doing that
      * right now.
      *
-     * @return void
+     * @return  void
      */
     function update()
     {
@@ -147,8 +148,8 @@ class File_Fstab {
     /**
      * Get a File_Fstab_Entry object for a path
      *
-     * @param $path string Mount point
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @param   string  $path  Mount point
+     * @return  mixed   File_Fstab_Entry instance on success, PEAR_Error otherwise
      */
     function &getEntryForPath($path)
     {
@@ -164,8 +165,8 @@ class File_Fstab {
     /**
      * Get a File_Fstab_Entry object for a block device
      *
-     * @param $blockdev string Block device
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @param   string  $blockdev  Block device
+     * @return  mixed   File_Fstab_Entry instance on success, PEAR_Error otherwise
      */
     function &getEntryForDevice($blockdev)
     {
@@ -182,8 +183,8 @@ class File_Fstab {
     /**
      * Get a File_Fstab_Entry object for a UUID
      *
-     * @param $uuid string UUID device
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @param   string  $uuid  UUID device
+     * @return  mixed   File_Fstab_Entry instance on success, PEAR_Error otherwise
      */
     function &getEntryForUUID($uuid)
     {
@@ -200,8 +201,8 @@ class File_Fstab {
     /**
      * Get a File_Fstab_Entry object for a label
      *
-     * @param $label string Label
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @param   string  $label  Label
+     * @return  mixed   File_Fstab_Entry instance on success, PEAR_Error otherwise
      */
     function &getEntryForLabel($label)
     {
@@ -218,8 +219,8 @@ class File_Fstab {
     /**
      * Add a new entry
      *
-     * @param $entry object Reference to a File_Fstab_Entry-derived class
-     * @return mixed boolean true on success, PEAR_Error otherwise.
+     * @param   object  $entry  Reference to a File_Fstab_Entry-derived class
+     * @return  mixed   boolean true on success, PEAR_Error otherwise.
      */
     function addEntry(&$entry)
     {
@@ -235,8 +236,23 @@ class File_Fstab {
     /**
      * Set class options
      *
-     * @param $options array Associative array of options to set
-     * @return void
+     * The allowed options are:
+     *
+     * - entryClass
+     *     Class to use for entries in the fstab. Defaults to File_Fstab_Entry.
+     *     you can use this to provide your own entry class with added
+     *     functionality. This class must extend File_Fstab_Entry.
+     *
+     * - file
+     *     File to parse. Defaults to /etc/fstab.
+     *
+     * - fieldSeparator
+     *     Separator for fields. This only affects the output when you call
+     *     {@link save()}.  This text is placed in between the elements of the
+     *     fstab entry line.
+     *
+     * @param   array  $options  Associative array of options to set
+     * @return  void
      */
     function setOptions($options = false)
     {
@@ -252,8 +268,8 @@ class File_Fstab {
      *
      * WARNING: This will strip comments and blank lines from the original fstab.
      *
-     * @return mixed true on success, PEAR_Error on failure
-     * @since 1.0.1
+     * @return  mixed  true on success, PEAR_Error on failure
+     * @since   1.0.1
      */
     function save($output = false)
     {
