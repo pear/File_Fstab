@@ -19,11 +19,8 @@
 // $Id$
 
 require_once 'PEAR.php';
+//require_once 'File/Fstab/Entry.php';
 require_once 'File/Fstab/Entry.php';
-
-define('FILE_FSTAB_ERROR_NOENT', -1);
-define('FILE_FSTAB_PERMISSION_DENIED', -2);
-define('FILE_FSTAB_WRONG_CLASS', -3);
 
 /**
  * Class to read, write, and manipulate fstab files
@@ -68,18 +65,6 @@ class File_Fstab {
     var $_isLoaded = false;
 
     /**
-     * Last-modified time of the fstab file
-     *
-     * This is used by load() to determine if the fstab has been changed since
-     * it was last loaded.
-     *
-     * @type int
-     * @access protected
-     * @see load()
-     */
-    var $_mtime = 0;
-
-    /**
      * Constructor
      *
      * @param $options array Associative array of options to set
@@ -116,23 +101,11 @@ class File_Fstab {
     /**
      * Parse fstab file
      *
-     *
-     *
-     * @param  $force boolean Force re-loading fstab, even if it hasn't changed.
      * @return void
      * @since 1.0.1
      */
-    function load($force = false)
+    function load()
     {
-        // Dont re-load if everything is up-to-date
-        if (filemtime($this->options['file']) < $this->_mtime &&
-            !$force) {
-            return;
-        }
-
-        // Clear things out before we load.
-        $this->entries = array();
-        
         $fp = fopen($this->options['file'], 'r');
         while ($line = fgets($fp, 1024)) {
 
@@ -150,7 +123,6 @@ class File_Fstab {
         }
 
         $this->_isLoaded = true;
-        $this->_mtime = filemtime($this->options['file']);
     }
 
     /**
@@ -173,7 +145,7 @@ class File_Fstab {
      * Get a File_Fstab_Entry object for a path
      *
      * @param $path string Mount point
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @return mixed File_Fstab_Entry instance or false
      */
     function &getEntryForPath($path)
     {
@@ -183,14 +155,15 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for path \"{$path}\"", PEAR_ERROR_NOENT);
+        //return PEAR::raiseError("No entry for \"$path\"");
+        return false;
     }
 
     /**
      * Get a File_Fstab_Entry object for a block device
      *
      * @param $blockdev string Block device
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @return mixed File_Fstab_Entry instance or false
      */
     function &getEntryForDevice($blockdev)
     {
@@ -201,14 +174,14 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for device \"{$blockdev}\"", PEAR_ERROR_NOENT);
+        return false;
     }
 
     /**
      * Get a File_Fstab_Entry object for a UUID
      *
      * @param $uuid string UUID device
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @return mixed File_Fstab_Entry instance or false
      */
     function &getEntryForUUID($uuid)
     {
@@ -219,14 +192,14 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for UUID \"{$uuid}\"", PEAR_ERROR_NOENT);
+        return false;
     }
 
     /**
      * Get a File_Fstab_Entry object for a label
      *
      * @param $label string Label
-     * @return mixed File_Fstab_Entry instance on success, PEAR_Error otherwise
+     * @return mixed File_Fstab_Entry instance or false
      */
     function &getEntryForLabel($label)
     {
@@ -237,7 +210,7 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for label \"{$label}\"", PEAR_ERROR_NOENT);
+        return false;
     }
     
     /**
@@ -249,8 +222,7 @@ class File_Fstab {
     function addEntry(&$entry)
     {
         if (!is_a($entry, 'File_Fstab_Entry')) {
-            return PEAR::raiseError("Entry must be derived from File_Fstab_Entry.",
-                                    FILE_FSTAB_WRONG_CLASS);
+            return PEAR::raiseError("Entry must be derived from File_Fstab_Entry.");
         }
         
         $this->entries[] = $entry;
@@ -284,8 +256,7 @@ class File_Fstab {
     {
         $output = $output ? $output : $this->options['file'];
         if (file_exists($output) && !is_writable($output)) {
-            return PEAR::raiseError("Can't write to {$output}",
-                                    FILE_FSTAB_PERMISSION_DENIED);
+            return PEAR::raiseError("Can't write to {$output}");
         }
         
         $fp = @fopen($output, 'w');

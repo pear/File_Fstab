@@ -130,136 +130,8 @@ class File_Fstab_Entry {
     }
 
     /**
-     * Set block device
-     *
-     * Only one of device, uuid, or label may be set; setting this will un-set
-     * any valies in the other variables.
-     *
-     * @since 1.1.0rc1
-     * @param $device string Value to set
-     * @return void
-     */
-    function setDevice($device)
-    {
-        $this->device = $device;
-        unset($this->uuid, $this->label);
-    }
-
-    /**
-     * Get block device
-     *
-     * @since 1.1.0rc1
-     * @return string
-     */
-    function getDevice()
-    {
-        return $this->device;
-    }
-
-    /**
-     * Set UUID
-     *
-     * Only one of device, uuid, or label may be set; setting this will un-set
-     * any valies in the other variables.
-     *
-     * @since 1.1.0rc1
-     * @param $uuid string Value to set
-     * @return void
-     */
-    function setUUID($uuid)
-    {
-        $this->uuid = $uuid;
-        unset($this->device, $this->label);
-    }
-
-    /**
-     * Get UUID
-     *
-     * @since 1.1.0rc1
-     * @return string
-     */
-    function getUUID()
-    {
-        return $this->uuid;
-    }
-
-    /**
-     * Set device label
-     *
-     * Only one of device, uuid, or label may be set; setting this will un-set
-     * any valies in the other variables.
-     *
-     * @since 1.1.0rc1
-     * @param $label string Value to set
-     * @return void
-     */
-    function setLabel($label)
-    {
-        $this->label = $label;
-        unset($this->device, $this->uuid);
-    }
-
-    /**
-     * Get device label
-     *
-     * @since 1.1.0rc1
-     * @return string
-     */
-    function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
-     * Set mount point
-     *
-     * @since 1.1.0rc1
-     * @param $dir string Value to set
-     * @return void
-     */
-    function setMountPoint($dir)
-    {
-        $this->mountPoint = $dir;
-    }
-
-    /**
-     * Get mount point
-     *
-     * @since 1.1.0rc1
-     * @return string
-     */
-    function getMountPoint()
-    {
-        return $this->mountPoint;
-    }
-
-    /**
-     * Set filesystem type
-     *
-     * @since 1.1.0rc1
-     * @param $type string Value to set
-     * @return void
-     */
-    function setFsType($type)
-    {
-        $this->fsType = $type;
-    }
-
-    /**
-     * Get filesystem type
-     *
-     * @since 1.1.0rc1
-     * @return string
-     */
-    function getFsType()
-    {
-        return $this->fsType;
-    }
-
-    /**
      * Set an entry
      *
-     * @since 1.1.0rc1
      * @param $entry string Single entry from fstab file
      */
     function setEntry($entry)
@@ -371,7 +243,7 @@ class File_Fstab_Entry {
     function getEntry($seperator)
     {
         $entry = array(
-            $this->_getDeviceUUIDOrLabel(),
+            $this->getDevice(),
             $this->mountPoint,
             $this->fsType,
             $this->_makeMountOptions(),
@@ -385,9 +257,8 @@ class File_Fstab_Entry {
      * Get device, or uuid, or label
      *
      * @return string Device/UUID/LABEL
-     * @access private
      */
-    function _getDeviceUUIDOrLabel()
+    function getDevice()
     {
         if ($this->device) {
             return $this->device;
