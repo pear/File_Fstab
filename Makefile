@@ -12,6 +12,10 @@ all: $(PACKAGE)
 validate: $(PKGXML)
 	$(PEARCMD) package-validate $<
     
+pretty: validate
+	XMLLINT_INDENT='    ' xmllint --format $(PKGXML) > temp.xml
+	mv temp.xml $(PKGXML)
+    
 $(PACKAGE): $(PKGXML) validate
 	$(PEARCMD) package $(PKGXML)
 
