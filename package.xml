@@ -24,12 +24,15 @@
     
     
     <release>
-        <version>1.0.3pre1</version>
+        <version>1.0.3rc1</version>
         <date>2004-04-27</date>
         <state>stable</state>
         <license>PHP License v3.0</license>
         <notes><![CDATA[
             * Use @version@ construct instead of hard-coding version.
+            * Add $_mtime to hold last-modified time of fstab file.
+            * Clear things out before re-loading the file.
+            * Better error handling.
         ]]></notes>
         <filelist>
             <dir name="/" baseinstalldir="File">
