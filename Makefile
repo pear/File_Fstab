@@ -22,5 +22,8 @@ $(PACKAGE): $(PKGXML) validate
 tag: $(PKGXML) $(PACKAGE)
 	$(PEARCMD) cvstag $(PKGXML)
     
+forcetag: $(PKGXML) $(PACKAGE)
+	$(PEARCMD) cvstag -F $(PKGXML)
+    
 clean:
 	rm -f *~ $(PACKAGE)
