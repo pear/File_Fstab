@@ -28,6 +28,7 @@
         <notes><![CDATA[
             * save() didn't add line breaks to the output, rendering it invalid.
             * Use @version@ instead of hard-coding it.
+            * Remove redundant (commented) 'require_once.'
         ]]></notes>
         <deps>
             <dep type="pkg" rel="has">PEAR</dep>
