@@ -26,7 +26,7 @@ require_once 'File/Fstab/Entry.php';
  * Class to read, write, and manipulate fstab files
  *
  * @package File_Fstab
- * @version 1.0.1
+ * @version @version@
  * @author Ian Eure <ieure@php.net>
  */
 class File_Fstab {
@@ -138,7 +138,7 @@ class File_Fstab {
     function update()
     {
         unset($this->entries);
-        $this->parse();
+        $this->load();
     }
 
     /**

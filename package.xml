@@ -24,19 +24,23 @@
     
     
     <release>
-        <version>1.0.2</version>
+        <version>1.0.3pre1</version>
         <date>2004-04-27</date>
         <state>stable</state>
         <license>PHP License v3.0</license>
         <notes><![CDATA[
-            * Add description to package.xml.
+            * Use @version@ construct instead of hard-coding version.
         ]]></notes>
         <filelist>
             <dir name="/" baseinstalldir="File">
-                <file role="php">Fstab.php</file>
+                <file role="php" name="Fstab.php">
+                    <replace from="@version@" to="version" type="package-info"/>
+                </file>
             </dir>
             <dir name="/" baseinstalldir="File/Fstab">
-                <file role="php">Entry.php</file>
+                <file role="php" name="Entry.php">
+                    <replace from="@version@" to="version" type="package-info"/>
+                </file>
             </dir>
             <dir name="/" baseinstalldir="docs/File_Fstab">
                 <file role="php">example.php</file>
@@ -45,6 +49,26 @@
     </release>
     
     <changelog>
+        <release>
+            <version>1.0.2</version>
+            <date>2004-04-27</date>
+            <state>stable</state>
+            <license>PHP License v3.0</license>
+            <notes><![CDATA[
+                * Add description to package.xml.
+            ]]></notes>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php">Fstab.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="File/Fstab">
+                    <file role="php">Entry.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="docs/File_Fstab">
+                    <file role="php">example.php</file>
+                </dir>
+            </filelist>
+        </release>
         <release>
             <version>1.0.1</version>
             <date>2004-04-20</date>

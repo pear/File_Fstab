@@ -28,7 +28,7 @@ define('FILE_FSTAB_ENTRY_DEVTYPE_LABEL', 3);
  * A single entry in a fstab file
  *
  * @package File_Fstab
- * @version 1.0
+ * @version @version@
  * @author Ian Eure <ieure@php.net>
  */
 class File_Fstab_Entry {
