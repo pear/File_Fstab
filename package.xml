@@ -2,7 +2,16 @@
 <package version="1.0">
     <name>File_Fstab</name>
     <summary>Read and write fstab files</summary>
-    <description>Test</description>
+    <description><![CDATA[
+        File_Fstab is an easy-to-use package which can read & write UNIX fstab files. It presents a pleasant object-oriented interface to the fstab.
+ 
+        Features:
+        * Supports blockdev, label, and UUID specification of mount device.
+        * Extendable to parse non-standard fstab formats by defining a new Entry class for that format.
+        * Easily examine and set mount options for an entry.
+        * Stable, functional interface.
+        * Fully documented with PHPDoc.
+    ]]></description>
     <maintainers>
         <maintainer>
             <user>ieure</user>
@@ -15,15 +24,12 @@
     
     
     <release>
-        <version>1.0.1</version>
-        <date>2004-04-20</date>
+        <version>1.0.2</version>
+        <date>2004-04-27</date>
         <state>stable</state>
         <license>PHP License v3.0</license>
         <notes><![CDATA[
-            * Split _Entry class into a seperate file.
-            * Change function names: parse() -> load() & write() -> save()
-            * Don't depend on File, use standard PHP file i/o.
-            * Update example.
+            * Add description to package.xml.
         ]]></notes>
         <filelist>
             <dir name="/" baseinstalldir="File">
@@ -39,6 +45,29 @@
     </release>
     
     <changelog>
+        <release>
+            <version>1.0.1</version>
+            <date>2004-04-20</date>
+            <state>stable</state>
+            <license>PHP License v3.0</license>
+            <notes><![CDATA[
+                * Split _Entry class into a seperate file.
+                * Change function names: parse() -> load() & write() -> save()
+                * Don't depend on File, use standard PHP file i/o.
+                * Update example.
+            ]]></notes>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php">Fstab.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="File/Fstab">
+                    <file role="php">Entry.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="docs/File_Fstab">
+                    <file role="php">example.php</file>
+                </dir>
+            </filelist>
+        </release>
         <release>
             <version>1.0</version>
             <date>2004-03-30</date>
