@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="1.0">
+    <name>File_Fstab</name>
+    <summary>Read and write fstab files</summary>
+    <description>Test</description>
+    <maintainers>
+        <maintainer>
+            <user>ieure</user>
+            <name>Ian Eure</name>
+            <email>ieure@php.net</email>
+            <role>lead</role>
+        </maintainer>
+    </maintainers>
+    
+    
+    
+    <release>
+        <version>1.0.1</version>
+        <date>2004-04-20</date>
+        <state>stable</state>
+        <license>PHP License v3.0</license>
+        <notes><![CDATA[
+            * Split _Entry class into a seperate file.
+            * Change function names: parse() -> load() & write() -> save()
+            * Don't depend on File, use standard PHP file i/o.
+            * Update example.
+        ]]></notes>
+        <filelist>
+            <dir name="/" baseinstalldir="File">
+                <file role="php">Fstab.php</file>
+            </dir>
+            <dir name="/" baseinstalldir="File/Fstab">
+                <file role="php">Entry.php</file>
+            </dir>
+            <dir name="/" baseinstalldir="docs/File_Fstab">
+                <file role="php">example.php</file>
+            </dir>
+        </filelist>
+    </release>
+    
+    <changelog>
+        <release>
+            <version>1.0</version>
+            <date>2004-03-30</date>
+            <state>stable</state>
+            <license>PHP License v3.0</license>
+            <notes><![CDATA[
+                * Fix CS: remove stray tabs, if/then/else all have braces now.
+                * Minor cleanups: update email addresses etc.
+                * Automaticly parse on instantiation.
+                * Ability to add entries & manipulate mount options for current entries added.
+                * Fixed an issue where mount options were not being set correctly when writing fstab.
+                * Fixed an issue where mount options weren't correctly parsed.
+                * Allow writing fstab to a different location, e.g. a temp file.
+                * Added an example.
+            ]]></notes>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php">Fstab.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="docs/File_Fstab">
+                    <file role="php">example.php</file>
+                </dir>
+            </filelist>
+        </release>
+        <release>
+            <version>0.9.1</version>
+            <date>2004-01-16</date>
+            <state>stable</state>
+            <license>PHP License v2.02</license>
+            <notes>Initial PEARification.</notes>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php">Fstab.php</file>
+                </dir>
+            </filelist>
+        </release>
+    </changelog>
+
+    <deps>
+        <dep type="pkg" rel="has" optional="no">PEAR</dep>
+    </deps>
+</package>
