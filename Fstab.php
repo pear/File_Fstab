@@ -19,7 +19,6 @@
 // $Id$
 
 require_once 'PEAR.php';
-//require_once 'File/Fstab/Entry.php';
 require_once 'File/Fstab/Entry.php';
 
 define('FILE_FSTAB_ERROR_NOENT', -1);
