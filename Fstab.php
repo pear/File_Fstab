@@ -265,7 +265,7 @@ class File_Fstab {
         }
 
         foreach($this->entries as $entry) {
-            fwrite($fp, $entry->getEntry($this->options['fieldSeperator']));
+            fwrite($fp, $entry->getEntry($this->options['fieldSeperator'])."\n");
         }
         fclose($fp);
         return true;
