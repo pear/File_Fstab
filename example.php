@@ -35,9 +35,11 @@ if ($rootEnt->hasMountOption('errors')) {
 }
 
 // Change fstype for /
+print "Chanking fstype for ".$rootEnt->getDeviceUUIDOrLabel()." (mounted on ".$rootEnt->getMountPoint().") to reiserfs\n";
 $rootEnt->fsType = 'reiserfs';
 
 // Create a new entry.
+print "Adding entry for CD-ROM\n";
 $ent = new File_Fstab_Entry;
 $ent->device = '/dev/cdrom';
 $ent->mountPoint = '/cdrom';
@@ -48,6 +50,7 @@ $ent->setMountOption('user');
 $sysTab->addEntry(&$ent);
 
 // Write to a temp file.
+print "Saving modified fstab to /tmp/newtab\n";
 $res = $sysTab->save('/tmp/newtab');
 if (PEAR::isError($res)) {
     die($res->getMessage()."\n");
