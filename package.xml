@@ -21,6 +21,36 @@
         </maintainer>
     </maintainers>
     <release>
+        <version>2.0.0</version>
+        <date>2004-06-09</date>
+        <license>PHP License v3.0</license>
+        <state>stable</state>
+        <notes><![CDATA[
+            * Bump version.
+        ]]></notes>
+        <deps>
+            <dep type="pkg" rel="has">PEAR</dep>
+        </deps>
+        <filelist>
+            <dir name="/" baseinstalldir="File">
+                <file role="php" name="Fstab.php">
+                    <replace from="@version@" to="version" type="package-info"/>
+                    <replace from="@package@" to="package" type="package-info"/>
+                </file>
+            </dir>
+            <dir name="/" baseinstalldir="File/Fstab">
+                <file role="php" name="Entry.php">
+                    <replace from="@version@" to="version" type="package-info"/>
+                    <replace from="@package@" to="package" type="package-info"/>
+                </file>
+            </dir>
+            <dir name="/" baseinstalldir="docs/File_Fstab">
+                <file role="php">example.php</file>
+            </dir>
+        </filelist>
+    </release>
+    <changelog>
+    <release>
         <version>2.0.0beta1</version>
         <date>2004-05-04</date>
         <license>PHP License v3.0</license>
@@ -51,7 +81,6 @@
             </dir>
         </filelist>
     </release>
-    <changelog>
     <release>
         <version>1.0.4</version>
         <date>2004-05-04</date>
