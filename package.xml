@@ -21,31 +21,62 @@
         </maintainer>
     </maintainers>
     
-    <release>
-        <version>1.0.3</version>
-        <date>2004-04-28</date>
-        <license>PHP License v3.0</license>
-        <state>stable</state>
-        <notes><![CDATA[
-            * update() was calling parse(), which no longer exists.
-        ]]></notes>
-        <deps>
-            <dep type="pkg" rel="has">PEAR</dep>
-        </deps>
-        <filelist>
-            <dir name="/" baseinstalldir="File">
-                <file role="php">Fstab.php</file>
-            </dir>
-            <dir name="/" baseinstalldir="File/Fstab">
-                <file role="php">Entry.php</file>
-            </dir>
-            <dir name="/" baseinstalldir="docs/File_Fstab">
-                <file role="php">example.php</file>
-            </dir>
-        </filelist>
-    </release>    
-        
+    
+    
+        <release>
+            <version>1.0.4</version>
+            <date>2004-05-04</date>
+            <license>PHP License v3.0</license>
+            <state>stable</state>
+            <notes><![CDATA[
+                * save() didn't add line breaks to the output, rendering it invalid.
+                * Use @version@ instead of hard-coding it.
+            ]]></notes>
+            <deps>
+                <dep type="pkg" rel="has">PEAR</dep>
+            </deps>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php" name="Fstab.php">
+                        <replace from="@version@" to="version" type="package-info"/>
+                    </file>
+                </dir>
+                <dir name="/" baseinstalldir="File/Fstab">
+                    <file role="php" name="Entry.php">
+                        <replace from="@version@" to="version" type="package-info"/>
+                    </file>
+                </dir>
+                <dir name="/" baseinstalldir="docs/File_Fstab">
+                    <file role="php">example.php</file>
+                </dir>
+            </filelist>
+        </release>
+    
     <changelog>
+        <release>
+            <version>1.0.3</version>
+            <date>2004-04-28</date>
+            <license>PHP License v3.0</license>
+            <state>stable</state>
+            <notes><![CDATA[
+                * update() was calling parse(), which no longer exists.
+            ]]></notes>
+            <deps>
+                <dep type="pkg" rel="has">PEAR</dep>
+            </deps>
+            <filelist>
+                <dir name="/" baseinstalldir="File">
+                    <file role="php">Fstab.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="File/Fstab">
+                    <file role="php">Entry.php</file>
+                </dir>
+                <dir name="/" baseinstalldir="docs/File_Fstab">
+                    <file role="php">example.php</file>
+                </dir>
+            </filelist>
+        </release>
+
         <release>
             <version>1.0.2</version>
             <date>2004-04-27</date>
