@@ -27,7 +27,7 @@ define('FILE_FSTAB_ENTRY_DEVTYPE_LABEL', 3);
 /**
  * A single entry in a fstab file
  *
- * @package File_Fstab
+ * @package @package@
  * @version @version@
  * @author Ian Eure <ieure@php.net>
  */
@@ -130,6 +130,186 @@ class File_Fstab_Entry {
     }
 
     /**
+     * Set block device
+     *
+     * Only one of device, uuid, or label may be set; setting this will un-set
+     * any valies in the other variables.
+     *
+     * @since 2.0.0beta1
+     * @param $device string Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setDevice($device)
+    {
+        $this->device = $device;
+        unset($this->uuid, $this->label);
+        return true;
+    }
+
+    /**
+     * Get block device
+     *
+     * @since 2.0.0beta1
+     * @return string
+     */
+    function getDevice()
+    {
+        return $this->device;
+    }
+
+    /**
+     * Set UUID
+     *
+     * Only one of device, uuid, or label may be set; setting this will un-set
+     * any valies in the other variables.
+     *
+     * @since 2.0.0beta1
+     * @param $uuid string Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setUUID($uuid)
+    {
+        $this->uuid = $uuid;
+        unset($this->device, $this->label);
+        return true;
+    }
+
+    /**
+     * Get UUID
+     *
+     * @since 2.0.0beta1
+     * @return string
+     */
+    function getUUID()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * Set device label
+     *
+     * Only one of device, uuid, or label may be set; setting this will un-set
+     * any valies in the other variables.
+     *
+     * @since 2.0.0beta1
+     * @param $label string Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setLabel($label)
+    {
+        $this->label = $label;
+        unset($this->device, $this->uuid);
+        return true;
+    }
+
+    /**
+     * Get device label
+     *
+     * @since 2.0.0beta1
+     * @return string
+     */
+    function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Set mount point
+     *
+     * @since 2.0.0beta1
+     * @param $dir string Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setMountPoint($dir)
+    {
+        $this->mountPoint = $dir;
+        return true;
+    }
+
+    /**
+     * Get mount point
+     *
+     * @since 2.0.0beta1
+     * @return string
+     */
+    function getMountPoint()
+    {
+        return $this->mountPoint;
+    }
+
+    /**
+     * Set filesystem type
+     *
+     * @since 2.0.0beta1
+     * @param $type string Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setFsType($type)
+    {
+        $this->fsType = $type;
+        return true;
+    }
+
+    /**
+     * Get filesystem type
+     *
+     * @since 2.0.0beta1
+     * @return string
+     */
+    function getFsType()
+    {
+        return $this->fsType;
+    }
+
+    /**
+     * Set filesystem dump frequency
+     *
+     * @since 2.0.0beta1
+     * @param $type int      Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setDumpFrequency($freq)
+    {
+        $this->dumpFrequency = $freq;
+        return true;
+    }
+
+    /**
+     * Get filesystem dump frequency
+     *
+     * @since 2.0.0beta1
+     * @return int
+     */
+    function getDumpFrequency()
+    {
+        return $this->dumpFrequency;
+    }
+
+    /**
+     * Set filesystem fsck pass number
+     *
+     * @since 2.0.0beta1
+     * @param $type  int     Value to set
+     * @return mixed boolean true on success, PEAR_Error otherwise
+     */
+    function setFsckPassNo($pass)
+    {
+        $this->fsckPassNo = $pass;
+        return true;
+    }
+    
+    /**
+     * Get filesystem fsck pass number
+     *
+     * @since 2.0.0beta1
+     * @return int
+     */   
+    function getFsckPassNo()
+    {
+        return $this->fsckPassNo;
+    }
+
+    /**
      * Set an entry
      *
      * @param $entry string Single entry from fstab file
@@ -154,23 +334,28 @@ class File_Fstab_Entry {
 
         // Sanitize.
         $this->_cleanup();
-        
-        $entry = &$this->entry;
 
-        $sections = split("\ +|\t+", $entry);
+        // It might be a good idea to allow specifying a custom whitespace
+        // character list.
+        $sections = split("\ +|\t+", $this->entry);
         if (count($sections) != 6) {
             return PEAR::raiseError("Invalid entry format");
         }
 
-        list($device, $this->mountPoint, $this->fsType, $options, $this->dumpFrequence, $this->fsckPassNo) = $sections;
+        list($device, $this->mountPoint, $this->fsType, $options, $this->dumpFrequency, $this->fsckPassNo) = $sections;
 
         // Device, UUID, or Label?
-        if (strstr($device, 'UUID')) {
-            list($null, $this->uuid) = split('=', $device);
-        } else if (strstr($device, 'LABEL')) {
-            list($null, $this->label) = split('=', $device);
-        } else {
-            $this->device = $device;
+        switch (substr($device, 0, 4)) {
+            case 'UUID':
+                list($null, $this->uuid) = explode('=', $device);
+                break;
+            
+            case 'LABE':
+                list($null, $this->label) = explode('=', $device);
+                break;
+                
+            default:
+                $this->device = $device;
         }
 
         $this->_parseMountOptions($options);
@@ -243,12 +428,12 @@ class File_Fstab_Entry {
     function getEntry($seperator)
     {
         $entry = array(
-            $this->getDevice(),
-            $this->mountPoint,
-            $this->fsType,
+            $this->_getDeviceEntry(),
+            $this->getMountPoint(),
+            $this->getFsType(),
             $this->_makeMountOptions(),
-            $this->dumpFrequency,
-            $this->fsckPassNo
+            $this->getDumpFrequency(),
+            $this->getFsckPassNo()
         );
         return implode($entry, $seperator);
     }
@@ -258,15 +443,41 @@ class File_Fstab_Entry {
      *
      * @return string Device/UUID/LABEL
      */
-    function getDevice()
+    function getDeviceUUIDOrLabel()
     {
         if ($this->device) {
-            return $this->device;
+            return $this->getDevice();
         } else if ($this->uuid) {
-            return 'UUID='.$this->uuid;
+            return $this->getUUID();
         } else if($this->label) {
-            return 'LABEL='.$this->label;
+            return $this->getLabel();
         }
+    }
+    
+    /**
+     * Get device entry for building fstab
+     *
+     * This is like getDeviceUUIDOrLabel(), but we prefix the actual value
+     * with the necessary string for it to work in the fstab.
+     *
+     * @return string Device/UUID/LABEL
+     * @access protected
+     */
+    function _getDeviceEntry()
+    {
+        switch ($this->getDeviceType()) {
+            case FILE_FSTAB_ENTRY_DEVTYPE_UUID:
+                $prefix = 'UUID=';
+                break;
+
+            case FILE_FSTAB_ENTRY_DEVTYPE_LABEL:
+                $prefix = 'LABEL=';
+                break;
+
+            default:
+                $prefix = '';
+        }
+        return $prefix.$this->getDeviceUUIDOrLabel();
     }
 
     /**
@@ -274,7 +485,7 @@ class File_Fstab_Entry {
      *
      * @return int One of FILE_FSTAB_ENTRY_DEVTYPE_BLOCKDEV, _UUID, or _LABEL
      */
-    function deviceType()
+    function getDeviceType()
     {
         if ($this->device) {
             return FILE_FSTAB_ENTRY_DEVTYPE_BLOCKDEV;
