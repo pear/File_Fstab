@@ -1,26 +1,33 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4: */
-// +----------------------------------------------------------------------+
-// | PHP Version 4                                                        |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 1997-2003 The PHP Group                                |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 3.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.php.net/license/3_0.txt.                                  |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Author: Ian Eure <ieure@php.net>                                     |
-// +----------------------------------------------------------------------+
-//
-// $Id$
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * Main
+ *
+ * PHP versions 4 and 5
+ *
+ * LICENSE: This source file is subject to version 3.0 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * @category  File Formats
+ * @package   File_Fstab
+ * @author    Ian Eure <ieure@php.net>
+ * @copyright 2004, 2005 Ian Eure
+ * @license   http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version   CVS: $Revision$
+ * @version   Release: @version@
+ * @link      http://pear.php.net/package/File_Fstab
+ */
 
 require_once 'PEAR.php';
 require_once 'File/Fstab/Entry.php';
 
+/**
+ * These defines enumerate the possible error types
+ */
 define('FILE_FSTAB_ERROR_NOENT', -1);
 define('FILE_FSTAB_PERMISSION_DENIED', -2);
 define('FILE_FSTAB_WRONG_CLASS', -3);
@@ -29,7 +36,7 @@ define('FILE_FSTAB_WRONG_CLASS', -3);
  * Class to read, write, and manipulate fstab files
  *
  * @package @package@
- * @version @version@
+ * @version Release: @version@
  * @author Ian Eure <ieure@php.net>
  * @license PHP License v3.0
  */
@@ -159,7 +166,7 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for path \"{$path}\"", PEAR_ERROR_NOENT);
+        return PEAR::raiseError("No entry for path \"{$path}\"", FILE_FSTAB_ERROR_NOENT);
     }
 
     /**
@@ -177,7 +184,7 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for device \"{$blockdev}\"", PEAR_ERROR_NOENT);
+        return PEAR::raiseError("No entry for device \"{$blockdev}\"", FILE_FSTAB_ERROR_NOENT);
     }
 
     /**
@@ -195,7 +202,7 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for UUID \"{$uuid}\"", PEAR_ERROR_NOENT);
+        return PEAR::raiseError("No entry for UUID \"{$uuid}\"", FILE_FSTAB_ERROR_NOENT);
     }
 
     /**
@@ -213,9 +220,9 @@ class File_Fstab {
                 return $this->entries[$key];
             }
         }
-        return PEAR::raiseError("No entry for label \"{$label}\"", PEAR_ERROR_NOENT);
+        return PEAR::raiseError("No entry for label \"{$label}\"", FILE_FSTAB_ERROR_NOENT);
     }
-    
+
     /**
      * Add a new entry
      *
@@ -228,7 +235,7 @@ class File_Fstab {
             return PEAR::raiseError("Entry must be derived from File_Fstab_Entry.",
                                     FILE_FSTAB_WRONG_CLASS);
         }
-        
+
         $this->entries[] = $entry;
         return true;
     }
