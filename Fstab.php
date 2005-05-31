@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * Main
+ * Main File_Fstab file
  *
  * PHP versions 4 and 5
  *
@@ -15,10 +15,10 @@
  * @category  File Formats
  * @package   File_Fstab
  * @author    Ian Eure <ieure@php.net>
- * @copyright 2004, 2005 Ian Eure
+ * @copyright (c) 2004, 2005 Ian Eure
  * @license   http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version   CVS: $Revision$
- * @version   Release: @version@
+ * @version   Release: @package_version@
+ * @version   CVS:     $Revision$
  * @link      http://pear.php.net/package/File_Fstab
  */
 
@@ -35,10 +35,14 @@ define('FILE_FSTAB_WRONG_CLASS', -3);
 /**
  * Class to read, write, and manipulate fstab files
  *
- * @package @package@
- * @version Release: @version@
- * @author Ian Eure <ieure@php.net>
- * @license PHP License v3.0
+ * @category  File Formats
+ * @package   File_Fstab
+ * @author    Ian Eure <ieure@php.net>
+ * @copyright (c) 2004, 2005 Ian Eure
+ * @license   http://www.php.net/license/3_0.txt  PHP License 3.0
+ * @version   Release: @package_version@
+ * @version   CVS:     $Revision$
+ * @link      http://pear.php.net/package/File_Fstab
  */
 class File_Fstab {
     /**
