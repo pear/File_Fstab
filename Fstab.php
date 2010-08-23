@@ -125,7 +125,7 @@ class File_Fstab {
         while ($line = fgets($fp, 1024)) {
 
             // Strip comments & trim whitespace
-            $line = trim(ereg_replace('#.*$', '', $line));
+            $line = trim(preg_replace('/#.*$/', '', $line));
 
             // Ignore blank lines
             if (!strlen($line)) {

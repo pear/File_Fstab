@@ -350,7 +350,8 @@ class File_Fstab_Entry {
 
         // It might be a good idea to allow specifying a custom whitespace
         // character list.
-        $sections = split("\ +|\t+", $this->entry);
+		$whitespaceRe = "/\ +|\t+/";
+        $sections = preg_split($whitespaceRe, $this->entry);
         if (count($sections) != 6) {
             return PEAR::raiseError("Invalid entry format");
         }
