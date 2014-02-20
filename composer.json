@@ -1,0 +1,32 @@
+{
+    "authors": [
+        {
+            "email": "ieure@php.net",
+            "name": "Ian Eure",
+            "role": "Lead"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "File": "./"
+        }
+    },
+    "description": "More info available on: http://pear.php.net/package/File_Fstab",
+    "include-path": [
+        "./"
+    ],
+    "license": "PHP License v3.0",
+    "name": "pear/file_fstab",
+    "support": {
+        "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=File_Fstab",
+        "source": "https://github.com/pear/File_Fstab"
+    },
+    "type": "library",
+    "require": {
+        "pear/pear_exception": "*",
+        "pear/pear": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
