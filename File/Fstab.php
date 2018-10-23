@@ -107,7 +107,7 @@ class File_Fstab {
         }
 
         if (!isset($instances[$fstab])) {
-            $instances[$fstab] = &new File_Fstab(array('file' => $fstab));
+            $instances[$fstab] = new File_Fstab(array('file' => $fstab));
         }
 
         return $instances[$fstab];
